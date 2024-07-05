@@ -1,4 +1,5 @@
-let activeColor = "#000";
+const defaultActiveColor = "white";
+let activeColor = defaultActiveColor;
 document.addEventListener('DOMContentLoaded', () => {
     createColorPalette();
     setColorPaletteEventListeners();
@@ -33,18 +34,30 @@ function createColorPalette() {
 }
 
 function setColorPaletteEventListeners() {
+    const activeColorDiv = document.getElementById('active-color');
+
     colorPalette.addEventListener('click', (event) => {
         if (event.target.classList.contains('color-option')) {
             activeColor = event.target.getAttribute('data-color');
+            activeColorDiv.style.backgroundColor = activeColor;
         }
     });
 }
 
-function setupResetButton() {
+function setActiveColorDiv() {
+    const activeColorDiv = document.getElementById('active-color');
+    activeColorDiv.style.backgroundColor = activeColor;
+}
 
+
+function setupResetButton() {
     const resetButton = document.getElementById('reset-btn');
+    const activeColorDiv = document.getElementById('active-color');
+
     resetButton.addEventListener('click', () => {
         const svgParts = document.querySelectorAll('svg g');
+        activeColor = defaultActiveColor;
+        activeColorDiv.style.backgroundColor = activeColor;
         svgParts.forEach((part, index) => {
             if (index === 0) return;
             part.style.fill = 'white';
