@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     createColorPalette();
     setColorPaletteEventListeners();
     setupImageEventListeners();
+    setupResetButton();
 });
 
 function setupImageEventListeners() {
@@ -18,7 +19,6 @@ function setupImageEventListeners() {
     });
 }
 
-
 function createColorPalette() {
     const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF', '#FFA500', '#800080', '#A52A2A', '#808080'];
     const colorPalette = document.getElementById('colorPalette');
@@ -32,11 +32,22 @@ function createColorPalette() {
     });
 }
 
-
 function setColorPaletteEventListeners() {
     colorPalette.addEventListener('click', (event) => {
         if (event.target.classList.contains('color-option')) {
             activeColor = event.target.getAttribute('data-color');
         }
+    });
+}
+
+function setupResetButton() {
+
+    const resetButton = document.getElementById('reset-btn');
+    resetButton.addEventListener('click', () => {
+        const svgParts = document.querySelectorAll('svg g');
+        svgParts.forEach((part, index) => {
+            if (index === 0) return;
+            part.style.fill = 'white';
+        });
     });
 }
