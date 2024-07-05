@@ -1,15 +1,7 @@
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
-}
-
 .container {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .svg-container {
@@ -18,13 +10,13 @@ body {
 
 .color-palette {
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .color-option {
     width: 30px;
     height: 30px;
-    margin: 0 5px;
     cursor: pointer;
     border: 1px solid #000;
 }
