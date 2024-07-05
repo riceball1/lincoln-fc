@@ -1,4 +1,4 @@
-let activeColor = "#FF0000";
+let activeColor = "#000";
 document.addEventListener('DOMContentLoaded', () => {
     createColorPalette();
     setColorPaletteEventListeners();
@@ -7,9 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function setupImageEventListeners() {
     const svgParts = document.querySelectorAll('svg g');
-
-    svgParts.forEach(part => {
-        part.addEventListener('click', (event) => {
+    svgParts.forEach((part, index) => {
+        if (index === 0) return;
+        part.style.fill = 'white';
+        part.addEventListener('click', (_) => {
             if (activeColor) {
                 part.style.fill = activeColor;
             }
