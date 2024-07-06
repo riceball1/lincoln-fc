@@ -38,37 +38,27 @@ body {
     border-radius: 20px;
 }
 
-#reset-btn {
+.btn {
     margin: 5px;
     padding: 10px 20px;
     cursor: pointer;
-    background-color: #000;
     color: #fff;
     border: none;
     border-radius: 5px;
-    font-size: 24px;
+    font-size: 16px;
+}
+
+#reset-btn {
+    background-color: #000;
 }
 
 #print-btn {
-    margin: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
     background-color: #a2cb1b;
     color: #000;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
 }
 
 #export-btn {
-    margin: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
     background-color: #126c68;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
 }
 
 .btn-container {
