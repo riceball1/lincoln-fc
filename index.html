@@ -10,8 +10,7 @@
 
 <body>
     <div class="container">
-        <div class="svg-container">
-
+        <div id="svg-container">
             <svg width="300" height="337" viewBox="0 0 300 337" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="part1">
                     <path
@@ -530,7 +529,13 @@
         <div class="color-palette" id="colorPalette"></div>
         <h2>Current Active Color:</h2>
         <div class="color-option" id="active-color"></div>
-        <button id="reset-btn">reset</button>
+
+        <div class="btn-container">
+            <button id="reset-btn">reset</button>
+            <button onclick="printSVG()" id="print-btn">print logo</button>
+            <button onclick="exportSVG()" id="export-btn">export svg</button>
+        </div>
+
     </div>
     <script src="script.js"></script>
 </body>

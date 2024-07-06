@@ -21,7 +21,7 @@ function setupImageEventListeners() {
 }
 
 function createColorPalette() {
-    const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF', '#FFA500', '#800080', '#A52A2A', '#808080'];
+    const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#00FFFF', '#FF00FF', '#000000']; 
     const colorPalette = document.getElementById('colorPalette');
 
     colors.forEach(color => {
@@ -63,4 +63,40 @@ function setupResetButton() {
             part.style.fill = 'white';
         });
     });
+}
+
+
+function printSVG() {
+    const svgElement = document.getElementById('svg-container').querySelector('svg');
+    const svgData = new XMLSerializer().serializeToString(svgElement);
+    const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+    const svgUrl = URL.createObjectURL(svgBlob);
+
+    const printWindow = window.open('', '_blank');
+    printWindow.document.open();
+    printWindow.document.write(`
+        <html>
+        <head>
+            <title>Lincoln FC Logo</title>
+        </head>
+        <body>
+            <img src="${svgUrl}" onload="window.print(); window.close();" />
+        </body>
+        </html>
+    `);
+    printWindow.document.close();
+}
+
+function exportSVG() {
+    const svgElement = document.getElementById('svg-container').querySelector('svg');
+    const svgData = new XMLSerializer().serializeToString(svgElement);
+    const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+    const svgUrl = URL.createObjectURL(svgBlob);
+
+    const downloadLink = document.createElement('a');
+    downloadLink.href = svgUrl;
+    downloadLink.download = 'lincoln-logo.svg';
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
 }
