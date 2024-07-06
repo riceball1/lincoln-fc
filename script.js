@@ -20,8 +20,20 @@ function setupImageEventListeners() {
     });
 }
 
+const colors = [
+    '#FF0000', // Red
+    '#00FF00', // Green
+    '#0000FF', // Blue
+    '#FFFF00', // Yellow
+    '#00FFFF', // Cyan
+    '#FF00FF', // Magenta
+    '#000000', // Black
+    '#FFFFFF', // White
+    '#FFA500', // Orange
+    '#800080'  // Purple
+];
+
 function createColorPalette() {
-    const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#00FFFF', '#FF00FF', '#000000']; 
     const colorPalette = document.getElementById('colorPalette');
 
     colors.forEach(color => {
