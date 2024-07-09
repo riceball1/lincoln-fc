@@ -3,13 +3,23 @@ let activeColor = defaultActiveColor;
 document.addEventListener('DOMContentLoaded', () => {
     createColorPalette();
     setColorPaletteEventListeners();
-    setupImageEventListeners();
+    setupColorPartsEventListeners();
     setupResetButton();
 });
 
-function setupImageEventListeners() {
-    const svgParts = document.querySelectorAll('svg g');
+function setupColorPartsEventListeners() {
+    const svgParts = document.querySelectorAll('svg path');
     svgParts.forEach((part, index) => {
+        if (index === 0 || index >= svgParts.length - 2) return;
+        part.style.fill = 'white';
+        part.addEventListener('click', (_) => {
+            if (activeColor) {
+                part.style.fill = activeColor;
+            }
+        });
+    });
+    const svgParts2 = document.querySelectorAll('svg circle');
+    svgParts2.forEach((part, index) => {
         if (index === 0) return;
         part.style.fill = 'white';
         part.addEventListener('click', (_) => {
@@ -67,12 +77,23 @@ function setupResetButton() {
     const activeColorDiv = document.getElementById('active-color');
 
     resetButton.addEventListener('click', () => {
-        const svgParts = document.querySelectorAll('svg g');
+        const svgParts = document.querySelectorAll('svg path');
         activeColor = defaultActiveColor;
         activeColorDiv.style.backgroundColor = activeColor;
         svgParts.forEach((part, index) => {
+            if (index === 0 || index >= svgParts.length - 2) return;
+            part.style.fill = 'white';
+        });
+
+        const svgParts2 = document.querySelectorAll('svg circle');
+        svgParts2.forEach((part, index) => {
             if (index === 0) return;
             part.style.fill = 'white';
+            part.addEventListener('click', (_) => {
+                if (activeColor) {
+                    part.style.fill = activeColor;
+                }
+            });
         });
     });
 }
