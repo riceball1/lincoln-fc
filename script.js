@@ -5,7 +5,24 @@ document.addEventListener('DOMContentLoaded', () => {
     setColorPaletteEventListeners();
     setupColorPartsEventListeners();
     setupResetButton();
+    setupThemeEventListener();
 });
+
+
+function setupThemeEventListener() {
+    const themeSwitch = document.getElementById('theme-switch');
+    const body = document.body;
+    themeSwitch.innerText = body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+    themeSwitch.style.backgroundColor = body.classList.contains('dark-mode') ? 'white' : 'black';
+    themeSwitch.style.color = body.classList.contains('dark-mode') ? 'black' : 'white';
+    themeSwitch.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        themeSwitch.innerText = body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+        themeSwitch.style.backgroundColor = body.classList.contains('dark-mode') ? 'white' : 'black';
+        themeSwitch.style.color = body.classList.contains('dark-mode') ? 'black' : 'white';
+    });
+
+}
 
 function setupColorPartsEventListeners() {
     const svgParts = document.querySelectorAll('svg path[fill="#D9D9D9"]');
@@ -39,7 +56,12 @@ const colors = [
     '#000000', // Black
     '#FFFFFF', // White
     '#FFA500', // Orange
-    '#800080'  // Purple
+    '#800080', // Purple
+    '#A52A2A', // Brown
+    '#808080', // Gray
+    '#FFC0CB', // Pink
+    '#008000', // Dark Green
+    '#ADD8E6'  // Light Blue
 ];
 
 function createColorPalette() {
@@ -76,6 +98,8 @@ function setupResetButton() {
     const activeColorDiv = document.getElementById('active-color');
 
     resetButton.addEventListener('click', () => {
+        activeColorDiv.style.backgroundColor = defaultActiveColor;
+        activeColor = defaultActiveColor;
         const svgParts = document.querySelectorAll('svg path[fill="#D9D9D9"]');
         svgParts.forEach((part) => {
             part.style.fill = 'white';
