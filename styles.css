@@ -2,6 +2,10 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 body.light-mode {
@@ -26,6 +30,7 @@ body.dark-mode {
 .container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 

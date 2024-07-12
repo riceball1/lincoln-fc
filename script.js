@@ -2,6 +2,7 @@ const defaultActiveColor = "white";
 let activeColor = defaultActiveColor;
 document.addEventListener('DOMContentLoaded', () => {
     createColorPalette();
+    createColorInputSelector();
     setColorPaletteEventListeners();
     setupColorPartsEventListeners();
     setupResetButton();
@@ -55,13 +56,6 @@ const colors = [
     '#FF00FF', // Magenta
     '#000000', // Black
     '#FFFFFF', // White
-    '#FFA500', // Orange
-    '#800080', // Purple
-    '#A52A2A', // Brown
-    '#808080', // Gray
-    '#FFC0CB', // Pink
-    '#008000', // Dark Green
-    '#ADD8E6'  // Light Blue
 ];
 
 function createColorPalette() {
@@ -76,10 +70,60 @@ function createColorPalette() {
     });
 }
 
+const initialColor = '#FF0000'; // Initial color (Red)
+
+function createColorInputSelector() {
+    const initialColor = '#FF0000'; // Initial color (Red)
+    const colorInputSelector = document.getElementById('colorInputSelector');
+
+    // Clear any previous content inside the colorInputSelector
+    colorInputSelector.innerHTML = '';
+
+    // Create a hidden color input element
+    const colorInput = document.createElement('input');
+    colorInput.type = 'color';
+    colorInput.style.display = 'none';
+    document.body.appendChild(colorInput);
+
+    // Create a single color option
+    const colorOption = document.createElement('div');
+    colorOption.className = 'color-option';
+    colorOption.setAttribute('data-color', initialColor);
+    colorOption.style.backgroundColor = initialColor;
+    colorInputSelector.appendChild(colorOption);
+
+    // Add event listener to the color option
+    colorOption.addEventListener('click', () => {
+        // Set the current color as the value of the color input
+        colorInput.value = colorOption.getAttribute('data-color');
+        // Trigger the color input to open
+        colorInput.click();
+    });
+
+    // Add event listener to the color input to handle color changes
+    colorInput.addEventListener('input', (event) => {
+        const newColor = event.target.value;
+        colorOption.style.backgroundColor = newColor;
+        colorOption.setAttribute('data-color', newColor);
+        // Blur the color input to close the color picker
+        colorInput.blur();
+        activeColor = newColor;
+    });
+}
+
 function setColorPaletteEventListeners() {
     const activeColorDiv = document.getElementById('active-color');
+    const colorPalette = document.getElementById('colorPalette');
+    const colorInputSelector = document.getElementById('colorInputSelector');
 
     colorPalette.addEventListener('click', (event) => {
+        if (event.target.classList.contains('color-option')) {
+            activeColor = event.target.getAttribute('data-color');
+            activeColorDiv.style.backgroundColor = activeColor;
+        }
+    });
+
+    colorInputSelector.addEventListener('click', (event) => {
         if (event.target.classList.contains('color-option')) {
             activeColor = event.target.getAttribute('data-color');
             activeColorDiv.style.backgroundColor = activeColor;
@@ -128,6 +172,7 @@ function setupResetButton() {
                 }
             });
         });
+        createColorInputSelector();
     });
 }
 
