@@ -72,7 +72,7 @@ function createColorPalette() {
 
 function createColorInputSelector() {
     const initialColor = '#FF0000'; // Initial color (Red)
-    const colorInputSelector = document.getElementById('colorInputSelector');
+    const colorInputSelector = document.getElementById('color-input-selector');
 
     // Clear any previous content inside the colorInputSelector
     colorInputSelector.innerHTML = '';
@@ -108,21 +108,25 @@ function createColorInputSelector() {
         activeColor = newColor;
     });
 
-        // Add event listener to the color input to handle color changes
-        colorInput.addEventListener('change', (event) => {
-            const newColor = event.target.value;
-            colorOption.style.backgroundColor = newColor;
-            colorOption.setAttribute('data-color', newColor);
-            // Blur the color input to close the color picker
-            colorInput.blur();
-            activeColor = newColor;
-        });
+    // Create a color picker button
+    const colorPickerButton = document.createElement('button');
+    colorPickerButton.id = 'color-picker-btn';
+    colorPickerButton.className = 'btn';
+    colorPickerButton.innerText = 'Select';
+    colorInputSelector.appendChild(colorPickerButton);
+
+    // Add event listener to the color picker button
+    colorPickerButton.addEventListener('click', () => {
+        // Trigger the color input to open
+        colorInput.click();
+    
+    });
 }
 
 function setColorPaletteEventListeners() {
     const activeColorDiv = document.getElementById('active-color');
     const colorPalette = document.getElementById('colorPalette');
-    const colorInputSelector = document.getElementById('colorInputSelector');
+    const colorInputSelector = document.getElementById('color-input-selector');
 
     colorPalette.addEventListener('click', (event) => {
         if (event.target.classList.contains('color-option')) {

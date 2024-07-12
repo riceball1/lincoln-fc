@@ -69,6 +69,13 @@ body.dark-mode {
     border-radius: 20px;
 }
 
+#color-input-selector {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
 .btn {
     margin: 5px;
     padding: 10px 20px;
@@ -81,6 +88,11 @@ body.dark-mode {
 
 #reset-btn {
     background-color: #000;
+}
+
+#color-picker-btn {
+    background-color: chocolate;
+    color:#000;
 }
 
 #print-btn {
