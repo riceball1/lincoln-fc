@@ -70,8 +70,6 @@ function createColorPalette() {
     });
 }
 
-const initialColor = '#FF0000'; // Initial color (Red)
-
 function createColorInputSelector() {
     const initialColor = '#FF0000'; // Initial color (Red)
     const colorInputSelector = document.getElementById('colorInputSelector');
@@ -109,6 +107,16 @@ function createColorInputSelector() {
         colorInput.blur();
         activeColor = newColor;
     });
+
+        // Add event listener to the color input to handle color changes
+        colorInput.addEventListener('change', (event) => {
+            const newColor = event.target.value;
+            colorOption.style.backgroundColor = newColor;
+            colorOption.setAttribute('data-color', newColor);
+            // Blur the color input to close the color picker
+            colorInput.blur();
+            activeColor = newColor;
+        });
 }
 
 function setColorPaletteEventListeners() {
