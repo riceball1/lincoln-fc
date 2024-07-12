@@ -71,6 +71,7 @@ function createColorPalette() {
 }
 
 function createColorInputSelector() {
+    console.log('Creating color input selector')
     const initialColor = '#FF0000'; // Initial color (Red)
     const colorInputSelector = document.getElementById('color-input-selector');
 
@@ -80,46 +81,26 @@ function createColorInputSelector() {
     // Create a hidden color input element
     const colorInput = document.createElement('input');
     colorInput.type = 'color';
-    colorInput.style.display = 'none';
-    document.body.appendChild(colorInput);
-
-    // Create a single color option
-    const colorOption = document.createElement('div');
-    colorOption.className = 'color-option';
-    colorOption.setAttribute('data-color', initialColor);
-    colorOption.style.backgroundColor = initialColor;
-    colorInputSelector.appendChild(colorOption);
-
-    // Add event listener to the color option
-    colorOption.addEventListener('click', () => {
-        // Set the current color as the value of the color input
-        colorInput.value = colorOption.getAttribute('data-color');
-        // Trigger the color input to open
-        colorInput.click();
-    });
+    colorInputSelector.appendChild(colorInput);
+    colorInput.value = initialColor;
 
     // Add event listener to the color input to handle color changes
     colorInput.addEventListener('input', (event) => {
         const newColor = event.target.value;
+        console.log('New color:', event);
+        const activeColorDiv = document.getElementById('active-color');
         colorOption.style.backgroundColor = newColor;
         colorOption.setAttribute('data-color', newColor);
-        // Blur the color input to close the color picker
-        colorInput.blur();
         activeColor = newColor;
+        activeColorDiv.style.backgroundColor = activeColor;
     });
 
-    // Create a color picker button
-    const colorPickerButton = document.createElement('button');
-    colorPickerButton.id = 'color-picker-btn';
-    colorPickerButton.className = 'btn';
-    colorPickerButton.innerText = 'Select';
-    colorInputSelector.appendChild(colorPickerButton);
-
-    // Add event listener to the color picker button
-    colorPickerButton.addEventListener('click', () => {
-        // Trigger the color input to open
-        colorInput.click();
-    
+    colorInput.addEventListener('change', (event) => {
+        console.log('Change:', event.target.value);
+        const newColor = event.target.value;
+        const activeColorDiv = document.getElementById('active-color');
+        activeColor = newColor;
+        activeColorDiv.style.backgroundColor = activeColor;
     });
 }
 
